@@ -35,7 +35,15 @@ class _ChatBotPageState extends State<ChatBotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Des Questions ?")),
+      appBar: AppBar(
+        title: const Text(
+          'Des Questions ?',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color(0xFF0891B2),
+        iconTheme: const IconThemeData(color: Colors.white),
+        elevation: 0,
+      ),
       body: Column(
         children: [
           Expanded(
