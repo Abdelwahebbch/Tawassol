@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import '../screens/reusable_widgets.dart';
 
-class OppEx2 extends StatefulWidget {
+class PremiumOppView extends StatefulWidget {
   final String structName;
-  const OppEx2({super.key, required this.structName});
+  final String longDescripton;
+  final String services;
+  final String contact;
+  const PremiumOppView({
+    super.key,
+    required this.structName,
+    required this.longDescripton,
+    required this.services,
+    required this.contact,
+  });
 
   @override
-  State<OppEx2> createState() => _OppEx2State();
+  State<PremiumOppView> createState() => _PremiumOppViewState();
 }
 
-class _OppEx2State extends State<OppEx2> {
+class _PremiumOppViewState extends State<PremiumOppView> {
   bool showForm = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ideaController = TextEditingController();
@@ -29,7 +38,6 @@ class _OppEx2State extends State<OppEx2> {
       ),
       body: Stack(
         children: [
-          // ---- Contenu principal ----
           SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -67,21 +75,21 @@ class _OppEx2State extends State<OppEx2> {
                 buildSection(
                   context,
                   'Description',
-                  '--------------------------------------------------------',
+                  widget.longDescripton,
                   Icons.info_outline,
                 ),
                 const SizedBox(height: 24),
                 buildSection(
                   context,
                   'Services',
-                  '--------------------------------------------------------',
+                  widget.services,
                   Icons.star_outline,
                 ),
                 const SizedBox(height: 24),
                 buildSection(
                   context,
                   'Contact',
-                  'Num Tel : 21 123 456 \nEmail : test@contact.org',
+                  widget.contact,
                   Icons.contact_support_outlined,
                 ),
                 const SizedBox(height: 32),
@@ -102,12 +110,9 @@ class _OppEx2State extends State<OppEx2> {
             ),
           ),
 
-          // Form affiche avec Stack
           if (showForm)
             Container(
-              color: Colors.black.withValues(
-                alpha: 0.5,
-              ), // Fond semi-transparent
+              color: Colors.black.withValues(alpha: 0.5),
               child: Center(
                 child: Container(
                   padding: const EdgeInsets.all(20),
