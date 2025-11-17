@@ -90,19 +90,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 120,
                           height: 120,
                           decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [
-                                AppTheme.primaryColor,
-                                AppTheme.secondaryColor,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Image.asset("images/logo.png"),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 12),
                         Text(
                           'Tawassol',
                           style: Theme.of(context).textTheme.headlineLarge
