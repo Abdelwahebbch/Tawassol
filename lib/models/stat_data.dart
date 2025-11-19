@@ -1,4 +1,3 @@
-import 'package:hackathonpeeug/models/entrepreneur_model.dart';
 import 'package:hackathonpeeug/models/structure.dart';
 
 List<Structure> structures = [

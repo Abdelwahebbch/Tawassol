@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathonpeeug/models/stat_data.dart';
-import 'package:hackathonpeeug/screens/profile_screen.dart';
 import 'package:hackathonpeeug/static_opp/premium_opp_view.dart';
 import 'package:hackathonpeeug/widgets/failure_message.dart';
-import '../widgets/introduction_card.dart';
 import '../widgets/structure_info.dart';
 
 class HomeScreen extends StatefulWidget {
