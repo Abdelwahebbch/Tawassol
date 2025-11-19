@@ -24,7 +24,17 @@ class IntoductionCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
+            child: Text(
+              'Voici toutes les opportunités actuellement disponibles.',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF4B5563),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
             child: Text(
               'Voici toutes les opportunités actuellement disponibles.  ',
               style: TextStyle(
