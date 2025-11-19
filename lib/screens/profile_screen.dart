@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../models/entrepreneur_model.dart';
 import 'reusable_widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -12,8 +10,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Student? student;
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   Future<void> _logout() async {
     if (_isLoading) return;
@@ -37,59 +34,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  /// Fetch student data from Firestore
-  Future<Student?> fetchStudent() async {
-    try {
-      final uid = FirebaseAuth.instance.currentUser?.uid;
-      if (uid == null) return null;
-
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(uid)
-          .get();
-      if (!doc.exists) return Student.emptyStudent();
-
-      return Student.fromFireStore(doc.data()!);
-    } catch (e) {
-      debugPrint("Error fetching student: $e");
-      return null;
-    }
-  }
-
-  /// Load student when screen starts
   @override
   void initState() {
     super.initState();
-    loadStudent();
-  }
-
-  Future<void> loadStudent() async {
-    setState(() => _isLoading = true);
-    final fetchedStudent = await fetchStudent();
-    setState(() {
-      student = fetchedStudent;
-      _isLoading = false;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
+    final userData = ModalRoute.of(context)!.settings.arguments as Map?;
 
-    final userName = student?.name ?? "Not Available!";
-    final userCin = student?.cin ?? "Not Available";
-    final nomPole = student?.nomPole ?? "Not Available";
-    final finTotale = student?.finTotale ?? "Not Available";
-    final score = student?.score ?? "Not Available";
+    final userName = userData?['Nom'] ?? "NNa";
+    final userCin = userData?['Cin'] ?? "NN";
+    final nomPole = userData?['Nompole'] ?? "NN";
+    final finTotal = userData?['Fintot'] ?? "NN";
+    final score = userData?['Score'] ?? "NN";
+    final plan = userData?['Plan'] ?? "NN";
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Section
             Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF0891B2),
@@ -166,6 +131,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       nomPole,
                       Icons.school,
                     ),
+                    buildInfoItem(
+                      context,
+                      'Plan Actuel ',
+                      plan,
+                      Icons.rocket_launch,
+                    ),
                   ]),
                   const SizedBox(height: 32),
                   buildInfoSection(context, 'Statistiques', [
@@ -178,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     buildInfoItem(
                       context,
                       'Financement total',
-                      '$finTotale millimes',
+                      '$finTotal millimes',
                       Icons.account_balance_wallet,
                     ),
                   ]),
